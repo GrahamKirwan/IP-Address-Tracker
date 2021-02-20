@@ -19,10 +19,11 @@ section {
 }
 
 section .top {
-  height: 33%;
+  height: 39%;
   background: url("/images/pattern-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
 section .top_contents {
@@ -55,6 +56,7 @@ section .top_contents--input input {
   border-radius: 10px;
   border: none;
   padding-left: 20px;
+  margin-bottom: 40px;
 }
 
 section .top_contents--input input:focus {
@@ -75,6 +77,47 @@ section .top_contents--input button {
 
 section .top_contents--input button:focus {
   outline: none;
+}
+
+section .top_results {
+  position: absolute;
+  z-index: 1000;
+  right: 50%;
+  -webkit-transform: translateX(50%);
+          transform: translateX(50%);
+  width: 1200px;
+  height: 100px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+section .top_results--section {
+  height: 100%;
+  width: 100%;
+  border-right: 1px solid #eee;
+}
+
+section .top_results--section:last-child {
+  border-right: none;
+}
+
+section .top_results--section p {
+  color: #969696;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 500;
+  padding-left: 30px;
+  margin-top: 0;
+}
+
+section .top_results--section h2 {
+  padding-left: 30px;
+  color: #2b2b2b;
+  font-size: 23px;
 }
 
 section .map {
