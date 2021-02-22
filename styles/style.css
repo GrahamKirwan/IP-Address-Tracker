@@ -112,6 +112,10 @@ section .top_contents--input button:focus {
   outline: none;
 }
 
+section .top_contents--input button:hover {
+  background-color: #3d3d3d;
+}
+
 @media (max-width: 800px) {
   section .top_contents--input {
     width: 90%;

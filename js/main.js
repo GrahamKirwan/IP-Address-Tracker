@@ -10,7 +10,7 @@ let inputVal;
 
 ipBtn.addEventListener('click', function(){
     inputVal = input.value;
-    input.value = '';
+    // input.value = '';
     
     // hasNumber(inputVal);
     fetchData(inputVal);
@@ -22,7 +22,7 @@ input.addEventListener("keyup", function(event) {
       // Cancel the default action, if needed
       event.preventDefault();
       inputVal = input.value;
-      input.value = '';
+    //   input.value = '';
     
       // hasNumber(inputVal);
       fetchData(inputVal);
@@ -79,7 +79,7 @@ let mymap = L.map('map');
 
 // Render map based on coordinates
 function renderMap(coords) {
-    mymap.setView(coords, 16);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+    mymap.setView(coords, 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(mymap);
     var marker = L.marker(coords).addTo(mymap);
 }

@@ -91,6 +91,10 @@ section {
                     outline: none;
                 }
 
+                button:hover {
+                    background-color: lighten($color: $darkGrey, $amount: 7%);
+                }
+
                 @media (max-width: 800px) {
                     width: 90%;
                 }
