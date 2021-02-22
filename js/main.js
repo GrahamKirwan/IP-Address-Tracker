@@ -6,14 +6,18 @@ const domLocation = document.querySelector('.dom-location');
 const domTimezone = document.querySelector('.dom-timezone');
 const domIsp = document.querySelector('.dom-isp');
 
+const spinner = document.getElementById("spinner");
+const btnImage = document.getElementById("btn-image");
+
 let inputVal;
 
 ipBtn.addEventListener('click', function(){
     inputVal = input.value;
-    // input.value = '';
+    input.value = '';
     
-    // hasNumber(inputVal);
     fetchData(inputVal);
+    spinner.classList.add('show');
+    btnImage.classList.add('btn-image-hide');
 });
 
 input.addEventListener("keyup", function(event) {
@@ -22,10 +26,13 @@ input.addEventListener("keyup", function(event) {
       // Cancel the default action, if needed
       event.preventDefault();
       inputVal = input.value;
-    //   input.value = '';
+      input.value = '';
     
-      // hasNumber(inputVal);
       fetchData(inputVal);
+      spinner.classList.add('show');
+      btnImage.classList.add('btn-image-hide');
+
+
     }
 });
 
@@ -65,6 +72,10 @@ function displayData (data) {
     domIsp.textContent = dataIsp;
 
     renderMap(coords);
+
+    //Remove spinner and replace with arrow
+    spinner.classList.remove('show');
+    btnImage.classList.remove('btn-image-hide');
 
     console.log(data);
     console.log(data.ip);
