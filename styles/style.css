@@ -50,6 +50,16 @@ section .top_contents--heading {
   color: #fff;
 }
 
+@media (max-width: 800px) {
+  section .top_contents--heading {
+    font-size: 3em;
+  }
+}
+
+section .top_contents--input {
+  position: relative;
+}
+
 section .top_contents--input input {
   width: 500px;
   height: 45px;
@@ -57,6 +67,18 @@ section .top_contents--input input {
   border: none;
   padding-left: 20px;
   margin-bottom: 40px;
+}
+
+@media (max-width: 800px) {
+  section .top_contents--input input {
+    width: 95%;
+  }
+}
+
+@media (max-width: 500px) {
+  section .top_contents--input input {
+    width: 90%;
+  }
 }
 
 section .top_contents--input input:focus {
@@ -75,8 +97,25 @@ section .top_contents--input button {
           transform: translateX(-100%) translateY(1px);
 }
 
+@media (max-width: 800px) {
+  section .top_contents--input button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 49px;
+    -webkit-transform: translateX(0) translateY(0px);
+            transform: translateX(0) translateY(0px);
+  }
+}
+
 section .top_contents--input button:focus {
   outline: none;
+}
+
+@media (max-width: 800px) {
+  section .top_contents--input {
+    width: 90%;
+  }
 }
 
 section .top_results {
@@ -86,7 +125,6 @@ section .top_results {
   -webkit-transform: translateX(50%);
           transform: translateX(50%);
   width: 1200px;
-  height: 100px;
   background: #fff;
   border-radius: 10px;
   padding: 40px 0;
@@ -114,10 +152,39 @@ section .top_results--section p {
   margin-top: 0;
 }
 
+@media (max-width: 800px) {
+  section .top_results--section p {
+    padding-left: 0px;
+  }
+}
+
 section .top_results--section h2 {
   padding-left: 30px;
   color: #2b2b2b;
   font-size: 23px;
+}
+
+@media (max-width: 800px) {
+  section .top_results--section h2 {
+    padding-left: 0px;
+  }
+}
+
+@media (max-width: 1200px) {
+  section .top_results {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  section .top_results {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+    padding-bottom: 10px;
+  }
 }
 
 section .map {

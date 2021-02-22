@@ -3,7 +3,7 @@ const ipBtn = document.querySelector('.ip-btn');
 
 const domIp = document.querySelector('.dom-ip');
 const domLocation = document.querySelector('.dom-location');
-const domResults = document.querySelector('.dom-results');
+const domTimezone = document.querySelector('.dom-timezone');
 const domIsp = document.querySelector('.dom-isp');
 
 let inputVal;
@@ -14,7 +14,6 @@ ipBtn.addEventListener('click', function(){
     
     // hasNumber(inputVal);
     fetchData(inputVal);
-
 });
 
 input.addEventListener("keyup", function(event) {
@@ -22,14 +21,17 @@ input.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
       // Cancel the default action, if needed
       event.preventDefault();
-    inputVal = input.value;
+      inputVal = input.value;
       input.value = '';
     
-        // hasNumber(inputVal);
-        fetchData(inputVal);
-
+      // hasNumber(inputVal);
+      fetchData(inputVal);
     }
-  });
+});
+
+// Grab users initial IP 
+fetchData('');
+
 
 
 
@@ -38,26 +40,46 @@ function fetchData(inputVal) {
     if(/\d/.test(inputVal)) {
         console.log('ip entered');
         fetch(`https://geo.ipify.org/api/v1?apiKey=at_x8BrLqjVI2qaS7nBLLweQHmwLYUcD&ipAddress=${inputVal}`)
-        .then(res => console.log(res.json()));
+        .then(res => res.json())
+        .then(data => displayData(data));
     } else {
         console.log('domain entered');
         fetch(`https://geo.ipify.org/api/v1?apiKey=at_x8BrLqjVI2qaS7nBLLweQHmwLYUcD&domain=${inputVal}`)
-        .then(res => console.log(res.json()));
+        .then(res => res.json())
+        .then(data => displayData(data));
     }
 }
 
+function displayData (data) {
+    const dataIp = data.ip;
+    const dataLocation = `${data.location.city}, ${data.location.region}`;
+    const dataTimezone = `GMT ${data.location.timezone}`;
+    const dataIsp = data.isp;
+    const coordsLat = data.location.lat;
+    const coordsLng = data.location.lng;
+    const coords = [coordsLat, coordsLng];
 
-// Render map
-let mymap = L.map('map').setView([43.885330, -78.918820], 16);
+    domIp.textContent = dataIp;
+    domLocation.textContent = dataLocation;
+    domTimezone.textContent = dataTimezone;
+    domIsp.textContent = dataIsp;
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(mymap);
+    renderMap(coords);
+
+    console.log(data);
+    console.log(data.ip);
+    console.log(data.location.region);
+    console.log(data.location.timezone);
+    console.log(data.isp);
+}
+
+// Initialise map
+let mymap = L.map('map');
 
 
-
-// IP Geolocation API
-// const req = 'https://geo.ipify.org/api/v1?apiKey=at_x8BrLqjVI2qaS7nBLLweQHmwLYUcD&ipAddress=192.212.174.101';
-
-// fetch('https://geo.ipify.org/api/v1?apiKey=at_x8BrLqjVI2qaS7nBLLweQHmwLYUcD&ipAddress=8.8.8.8').then(res => console.log(res.json()));
-// fetch('https://geo.ipify.org/api/v1?apiKey=at_x8BrLqjVI2qaS7nBLLweQHmwLYUcD&domain=facebook.com').then(res => console.log(res.json()));
+// Render map based on coordinates
+function renderMap(coords) {
+    mymap.setView(coords, 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+    var marker = L.marker(coords).addTo(mymap);
+}
